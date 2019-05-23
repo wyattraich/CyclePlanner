@@ -1,7 +1,4 @@
 import scipy
-import scipy.misc
-import cv2
-import imageio
 from glob import glob
 import numpy as np
 
@@ -20,12 +17,12 @@ class DataLoader():
         for img_path in batch_images:
             img = self.imread(img_path)
             if not is_testing:
-                img = cv2.resize(img, self.img_res)
+                img = scipy.misc.imresize(img, self.img_res)
 
                 if np.random.random() > 0.5:
                     img = np.fliplr(img)
             else:
-                img = cv2.resize(img, self.img_res)
+                img = scipy.misc.imresize(img, self.img_res)
             imgs.append(img)
 
         imgs = np.array(imgs)/127.5 - 1.
@@ -53,8 +50,8 @@ class DataLoader():
                 img_A = self.imread(img_A)
                 img_B = self.imread(img_B)
 
-                img_A = cv2.resize(img_A, self.img_res)
-                img_B = cv2.resize(img_B, self.img_res)
+                img_A = scipy.misc.imresize(img_A, self.img_res)
+                img_B = scipy.misc.imresize(img_B, self.img_res)
 
                 if not is_testing and np.random.random() > 0.5:
                         img_A = np.fliplr(img_A)
@@ -70,9 +67,9 @@ class DataLoader():
 
     def load_img(self, path):
         img = self.imread(path)
-        img = cv2.resize(img, self.img_res)
+        img = scipy.misc.imresize(img, self.img_res)
         img = img/127.5 - 1.
         return img[np.newaxis, :, :, :]
 
     def imread(self, path):
-        return imageio.imread(path, pilmode='RGB').astype(np.float)
+        return scipy.misc.imread(path, mode='RGB').astype(np.float)
