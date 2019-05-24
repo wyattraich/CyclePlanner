@@ -268,7 +268,7 @@ class CycleGAN():
                 axs[i, j].set_title(titles[j])
                 axs[i,j].axis('off')
                 cnt += 1
-        fig.savefig("images/%s/%d_%d.png" % (self.dataset_name, epoch, batch_i))
+        fig.savefig("images/%s/%d_%d_old.png" % (self.dataset_name, epoch, batch_i))
         plt.close()
 
 
