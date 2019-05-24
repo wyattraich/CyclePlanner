@@ -228,13 +228,13 @@ class CycleGAN():
                 if batch_i % sample_interval == 0:
                     self.sample_images(epoch, batch_i)
 
-            if os.path.exists("saved_model/gen_model%d.h5" % (epoch-1)):
+            if os.path.exists("saved_model/gen_model%d_old.h5" % (epoch-1)):
                 if epoch % 30 != 0:
-                    os.remove("saved_model/gen_model%d.h5" % (epoch-1))
-                    os.remove("saved_model/comb_model%d.h5" % (epoch-1))
+                    os.remove("saved_model/gen_model%d_old.h5" % (epoch-1))
+                    os.remove("saved_model/comb_model%d_old.h5" % (epoch-1))
 
-            self.g_AB.save("saved_model/gen_model%d.h5" % (epoch))
-            self.combined.save("saved_model/comb_model%d.h5" % (epoch))
+            self.g_AB.save("saved_model/gen_model%d_old.h5" % (epoch))
+            self.combined.save("saved_model/comb_model%d_old.h5" % (epoch))
 
     def sample_images(self, epoch, batch_i):
         os.makedirs('images/%s' % self.dataset_name, exist_ok=True)
