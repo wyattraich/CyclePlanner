@@ -228,13 +228,13 @@ class CycleGAN():
                 if batch_i % sample_interval == 0:
                     self.sample_images(epoch, batch_i)
 
-            if os.path.exists("saved_model/gen_model%d_old.h5" % (epoch-1)):
+            if os.path.exists("saved_model/gen_model%d_line.h5" % (epoch-1)):
                 if epoch % 30 != 0:
-                    os.remove("saved_model/gen_model%d_old.h5" % (epoch-1))
-                    os.remove("saved_model/comb_model%d_old.h5" % (epoch-1))
+                    os.remove("saved_model/gen_model%d_line.h5" % (epoch-1))
+                    os.remove("saved_model/comb_model%d_line.h5" % (epoch-1))
 
-            self.g_AB.save("saved_model/gen_model%d_old.h5" % (epoch))
-            self.combined.save("saved_model/comb_model%d_old.h5" % (epoch))
+            self.g_AB.save("saved_model/gen_model%d_line.h5" % (epoch))
+            self.combined.save("saved_model/comb_model%d_line.h5" % (epoch))
 
     def sample_images(self, epoch, batch_i):
         os.makedirs('images/%s' % self.dataset_name, exist_ok=True)
@@ -268,13 +268,13 @@ class CycleGAN():
                 axs[i, j].set_title(titles[j])
                 axs[i,j].axis('off')
                 cnt += 1
-        fig.savefig("images/%s/%d_%d_old.png" % (self.dataset_name, epoch, batch_i))
+        fig.savefig("images/%s/%d_%d_line.png" % (self.dataset_name, epoch, batch_i))
         plt.close()
 
 
 if __name__ == '__main__':
     gan = CycleGAN()
-    gan.train(epochs=200, batch_size=1, sample_interval=200)
+    gan.train(epochs=400, batch_size=1, sample_interval=300)
 
     #"""
     """
